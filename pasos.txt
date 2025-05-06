@@ -1,0 +1,7 @@
+🚀 Próximos Pasos
+Configurar el repositorio Git con carpetas frontend/ y backend/
+Crear la interfaz inicial en React
+Implementar la carga de datos desde Excel/manual
+Desarrollar el backend para el sorteo
+Integrar exportación y envío de resultados
+Publicar en la web (Vercel + Railway o Firebase + Render)
