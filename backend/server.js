@@ -16,15 +16,20 @@
  */
 const express = require("express");
 const cors = require("cors");
+require('dotenv').config();
 const bodyParser = require('body-parser')
 const aspirantesRoutes = require("./src/routes/aspirantes");
 const sorteoRoutes = require("./src/routes/sorteo");  // 📌 Importamos la ruta del sorteo
+const authRoutes = require('./src/routes/auth');
+
+//console.log("PROBANDO CLAVE", process.env.JWT_SECRET); // Verificamos la clave secreta del JWT
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-//app.use(bodyParser.json())
+app.use(bodyParser.json())
 
+app.use('/auth', authRoutes);
 app.use("/aspirantes", aspirantesRoutes);
 app.use("/sorteo", sorteoRoutes);  // 📌 Usamos la ruta para realizar sorteos
 
