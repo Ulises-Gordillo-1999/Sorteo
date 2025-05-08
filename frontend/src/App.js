@@ -1,28 +1,35 @@
-import React from 'react';
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Aspirantes from './pages/Aspirantes';
-import Sorteo from './pages/Sorteo';
-import FormularioAspirante from './components/FormularioAspirante';
-import Login from './components/Login'; 
-import Dashboard from './components/Dashboard';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Aspirantes from "./pages/Aspirantes";
+import Sorteo from "./pages/Sorteo";
+import FormularioAspirante from "./components/FormularioAspirante";
+import Login from "./components/Login";
+import Dashboard from "./components/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
+import Home from './pages/Home'; // Componente para la página principal
+import Profile from './pages/Profile'; // Componente para el perfil
+import Settings from './pages/Settings'; // Componente para configuraciones
 
 function App() {
-  
   return (
-      <Router>
-        <Navbar/>
-        <div className='container-fluid mt-2 mx-auto'>
-          <Routes>
-            <Route path='/login' element={<Login/>}/>
-            <Route path='/admin' element={<Dashboard/>}/>
-            <Route path='/' element={<Aspirantes/>}/>
-            <Route path='/sorteo' element={<Sorteo/>}/>
-            <Route path='/inscripcion' element={<FormularioAspirante/>} />
-          </Routes>
-        </div>
-
-      </Router>
+    <Router>
+      
+      <div className="container-fluid mt-2 mx-auto">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          {/* Rutas Protegiddas */}
+          <Route path="/admin" element={<PrivateRoute><Dashboard />{" "}</PrivateRoute>} >
+          <Route index element={<Home/>}/>
+          <Route path='/admin/profile' element={<Profile/>}/>
+          <Route path='/admin/aspirantes' element={<Aspirantes/>}/>
+          <Route path='/admin/settings' element={<Settings/>}/>
+          </Route>
+          {/*Ruta publica */}
+          <Route path="/inscripcion" element={<FormularioAspirante />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 

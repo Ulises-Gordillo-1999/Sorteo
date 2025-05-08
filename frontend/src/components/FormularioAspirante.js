@@ -20,18 +20,9 @@ const FormularioAspirante = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Formulario enviado:", formData);
-    /*try {
-        const response = await axios.post("http://localhost:5000/aspirantes", formData, {
-          headers: { "Content-Type": "application/json" }
-        });
-    
-        alert(response.data.mensaje);
-      } catch (error) {
-        alert(error.response?.data?.error || "Error al registrar aspirante");
-      }*/
+    console.log("Formulario enviado:", formData); // Para depuración
 
-    axios.post("http://localhost:5000/aspirantes", formData)
+    axios.post("http://localhost:5000/inscripcion", formData)
     .then(response => {
       alert(response.data.mensaje); // Mensaje de éxito
       setFormData({ // Reseteamos el formulario

@@ -2,15 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Aspirante = require("../models/Aspirante");
 
-// Obtener todos los aspirantes
-router.get("/", (req, res) => {
-  Aspirante.obtenerTodos((err, aspirantes) => {
-    if (err)
-      return res.status(500).json({ error: "Error al obtener los aspirantes" });
-    res.json(aspirantes);
-  });
-});
-
 // Agregar un aspirante
 router.post("/", (req, res) => {
   console.log("Datos recibidos:", req.body); // Para depuración
@@ -70,31 +61,3 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
-
-/*const express = require("express");
-const router = express.Router();
-const Aspirante = require("../models/Aspirante");
-
-// Obtener todos los aspirantes
-router.get("/", (req, res) => {
-  Aspirante.obtenerTodos((err, aspirantes) => {
-    if (err) return res.status(500).json({ error: "Error al obtener los aspirantes" });
-    res.json(aspirantes);
-  });
-});
-
-// Agregar un aspirante
-router.post("/", (req, res) => {
-  const { nombre_completo, dni } = req.body;
-
-  if (!nombre_completo || !dni) {
-    return res.status(400).json({ error: "Nombre y DNI son obligatorios" });
-  }
-
-  Aspirante.agregar(nombre_completo, dni, (err, id) => {
-    if (err) return res.status(400).json({ error: err.message });
-    res.json({ mensaje: "Aspirante registrado con éxito", id });
-  });
-});
-
-module.exports = router;*/

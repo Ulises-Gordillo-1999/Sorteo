@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from '../utils/axiosConfig'; // Asegúrate de tener la configuración de axios en este archivo
 
 function Aspirantes() {
     const [aspirantes, setAspirantes] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:5000/aspirantes")
-            .then(response => setAspirantes(response.data))
-            .catch(error => console.error("Error al obtener aspirantes:", error));
+        const fetchAspirantes = async () => {
+            try {
+                const response = await api.get("http://localhost:5000/aspirantes");
+                setAspirantes(response.data);
+            } catch (error) {
+                console.error("Error al obtener aspirantes:", error);
+            }
+        };
+        fetchAspirantes();
     }, []);
 
     return (

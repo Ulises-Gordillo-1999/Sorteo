@@ -18,9 +18,11 @@ const express = require("express");
 const cors = require("cors");
 require('dotenv').config();
 const bodyParser = require('body-parser')
-const aspirantesRoutes = require("./src/routes/aspirantes");
+const aspirantesRoutes = require("./src/routes/aspirantesInscripcion");
+const aspirantes_CRUD_Routes = require("./src/routes/aspirantes_CRUD"); // 📌 Importamos la ruta para listar aspirantes
 const sorteoRoutes = require("./src/routes/sorteo");  // 📌 Importamos la ruta del sorteo
 const authRoutes = require('./src/routes/auth');
+const authMiddleware = require('./src/middleware/auth');
 
 //console.log("PROBANDO CLAVE", process.env.JWT_SECRET); // Verificamos la clave secreta del JWT
 
@@ -29,9 +31,13 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json())
 
-app.use('/auth', authRoutes);
-app.use("/aspirantes", aspirantesRoutes);
-app.use("/sorteo", sorteoRoutes);  // 📌 Usamos la ruta para realizar sorteos
+//rutas publicas
+app.use('/auth', authRoutes); // 📌 Usamos la ruta para autenticar usuarios
+app.use("/inscripcion", aspirantesRoutes);
+
+//rutas protegidas
+app.use('/aspirantes', authMiddleware, aspirantes_CRUD_Routes); // 📌 Usamos la ruta para listar aspirantes
+app.use("/sorteo", authMiddleware ,sorteoRoutes);  // 📌 Usamos la ruta para realizar sorteos
 
 
 const PORT = 5000;

@@ -1,0 +1,6 @@
+/backend/database/sorteo.db
+/node_modules/
+/.env
+/.vscode/
+/dist/
+/build/

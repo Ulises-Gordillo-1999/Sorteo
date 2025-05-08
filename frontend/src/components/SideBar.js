@@ -1,50 +1,94 @@
-import React from 'react'; 
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { logout } from "../utils/auth";
 
 const Sidebar = () => {
+  const location = useLocation();
+
+  // Función para comprobar si la ruta actual coincide
+  const isActive = (path) => location.pathname === path;
+
   return (
-    <div className="d-flex flex-column flex-shrink-0 h-75 p-3 text-white bg-dark" style={{ width: '280px' }}>
-      <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <div
+      className="d-flex flex-column flex-shrink-0 h-75 p-3 text-white bg-dark"
+      style={{ width: "280px" }}
+    >
+      <Link
+        to="/"
+        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+      >
         <i className="bi bi-bootstrap-fill fs-4 me-2"></i>
-        <span className="fs-5 fw-semibold">Panel Academicas</span>
-      </a>
+        <span className="fs-5 fw-semibold">Panel Académicas</span>
+      </Link>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
         <li className="nav-item">
-          <a href="#" className="nav-link active text-white">
+          <Link
+            className={`nav-link text-white ${isActive("/admin/") ? "active" : ""}`}
+            to="/admin/"
+          >
             <i className="bi bi-house-door me-2"></i>
             Home
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <Link
+            className={`nav-link text-white ${isActive("/admin/aspirantes") ? "active" : ""}`}
+            to="/admin/aspirantes"
+          >
             <i className="bi bi-speedometer2 me-2"></i>
             Aspirantes
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <Link
+            className={`nav-link text-white ${isActive("/admin/sorteo") ? "active" : ""}`}
+            to="/admin/sorteo"
+          >
             <i className="bi bi-table me-2"></i>
             Sorteos
-          </a>
+          </Link>
         </li>
         <li>
-          <a href="#" className="nav-link text-white">
+          <Link
+            className={`nav-link text-white ${isActive("/admin/sorteados") ? "active" : ""}`}
+            to="/admin/sorteados"
+          >
             <i className="bi bi-grid me-2"></i>
             Sorteados
-          </a>
+          </Link>
+        </li>
+        <li>
+          <Link
+            className={`nav-link text-white ${isActive("/admin/settings") ? "active" : ""}`}
+            to="/admin/settings"
+          >
+            <i className="bi bi-gear me-2"></i>
+            Settings
+          </Link>
         </li>
       </ul>
       <hr />
       <div className="dropdown">
-        <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2" />
-          <strong>mdo</strong>
-        </a>
-        <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a className="dropdown-item" href="#">Settings</a></li>
-          <li><a className="dropdown-item" href="#">Profile</a></li>
-          <li><hr className="dropdown-divider" /></li>
-          <li><a className="dropdown-item" href="#">Sign out</a></li>
+        <Link
+          to="/admin/profile"
+          className={`d-flex align-items-center text-white text-decoration-none ${
+            isActive("/admin/profile") ? "active" : ""
+          }`}
+        >
+          <img
+            src="https://github.com/mdo.png"
+            alt=""
+            width="32"
+            height="32"
+            className="rounded-circle me-2"
+          />
+          <strong>ADMIN</strong>
+        </Link>
+        <ul className="nav nav-pills flex-column mb-auto">
+          <button className="btn btn-danger mt-3" onClick={() => logout()}>
+            Cerrar sesión
+          </button>
         </ul>
       </div>
     </div>
