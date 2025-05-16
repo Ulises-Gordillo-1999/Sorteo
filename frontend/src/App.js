@@ -10,6 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Home from './pages/Home'; // Componente para la página principal
 import Profile from './pages/Profile'; // Componente para el perfil
 import Settings from './pages/Settings'; // Componente para configuraciones
+import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Componente para el formulario de aspirante
 
 function App() {
   return (
@@ -24,6 +25,8 @@ function App() {
           <Route path='/admin/profile' element={<Profile/>}/>
           <Route path='/admin/aspirantes' element={<Aspirantes/>}/>
           <Route path='/admin/settings' element={<Settings/>}/>
+          <Route path='/admin/sorteo' element={<Sorteo/>}/>
+          <Route path="aspirantes/:id" element={<AspiranteFormWrapper />} />
           </Route>
           {/*Ruta publica */}
           <Route path="/inscripcion" element={<FormularioAspirante />} />

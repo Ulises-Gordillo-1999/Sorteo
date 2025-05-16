@@ -1,9 +1,6 @@
 import React from 'react';
 import Sidebar from './SideBar'; // Asegúrate de tener este componente creado
 import { Outlet } from 'react-router-dom';
-import Home from '../pages/Home'; // Componente para la página principal
-import Profile from '../pages/Profile'; // Componente para el perfil
-import Settings from '../pages/Settings'; // Componente para configuraciones
 
 const Dashboard = () => {
 

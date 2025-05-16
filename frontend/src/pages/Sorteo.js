@@ -1,15 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
+import api from '../utils/axiosConfig'
 
 function Sorteo() {
     const [cantidad, setCantidad] = useState(35);
     const [seleccionados, setSeleccionados] = useState([]);
-
-    const realizarSorteo = () => {
-        axios.post("http://localhost:5000/sorteo", { cantidad })
-            .then(response => setSeleccionados(response.data.seleccionados))
-            .catch(error => console.error("Error al realizar el sorteo:", error));
-    };
+    
+    const realizarSorteo = async () => {
+        
+        try {
+            const response = await api.post("http://localhost:5000/sorteo", { cantidad})
+         console.log(response.data)
+         setSeleccionados(response.data.seleccionados)
+        } catch (error) {
+            console.error("Error al realizar el sorteo:", error);
+            alert("Error al realizar el sorteo. Por favor, inténtelo de nuevo.");
+        }
+        
+    }
 
     return (
         <div className="card">
