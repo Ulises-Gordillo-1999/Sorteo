@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import api from '../utils/axiosConfig'
+import ExportarExcel from '../components/ExportarExcel';
+
 
 function Sorteo() {
     const [cantidad, setCantidad] = useState(35);
@@ -12,6 +14,7 @@ function Sorteo() {
             const response = await api.post("http://localhost:5000/sorteo", { cantidad})
          console.log(response.data)
          setSeleccionados(response.data.seleccionados)
+         console.log(seleccionados)
         } catch (error) {
             console.error("Error al realizar el sorteo:", error);
             alert("Error al realizar el sorteo. Por favor, inténtelo de nuevo.");
@@ -39,6 +42,7 @@ function Sorteo() {
                 {seleccionados.length > 0 && (
                     <div className="mt-4">
                         <h4>Seleccionados:</h4>
+                        <ExportarExcel datos={seleccionados} />
                         <ul className="list-group">
                             {seleccionados.map((asp) => (
                                 <li key={asp.id} className="list-group-item">

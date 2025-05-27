@@ -12,7 +12,7 @@ const Dashboard = () => {
             <Sidebar />
 
             {/* Contenido principal */}
-            <div className="h-75 w-75 p-4 bg-light overflow-auto">
+            <div className="h-75 w-100 p-4 bg-light overflow-auto">
                 <h1 className="text-center">Panel de Administración</h1>
                 <hr />
                 <p className="text-center">Bienvenido al panel de administración. Aquí puedes gestionar los aspirantes y los sorteos.</p>

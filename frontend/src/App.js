@@ -15,8 +15,7 @@ import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Compone
 function App() {
   return (
     <Router>
-      
-      <div className="container-fluid mt-2 mx-auto">
+      <div className="container-fluid mt-2 mx-auto ">
         <Routes>
           <Route path="/login" element={<Login />} />
           {/* Rutas Protegiddas */}

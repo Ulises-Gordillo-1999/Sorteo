@@ -1,7 +1,11 @@
 import React, { useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import axios from "axios";
 
 const FormularioAspirante = () => {
+
+  const navigate = useNavigate();
+  // Estado para almacenar los datos del formulario
   const [formData, setFormData] = useState({
     correo: "",
     apellidoAspirante: "",
@@ -20,22 +24,23 @@ const FormularioAspirante = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log("Formulario enviado:", formData); // Para depuración
+    //console.log("Formulario enviado:", formData);// Para depuración
 
     axios.post("http://localhost:5000/inscripcion", formData)
     .then(response => {
       alert(response.data.mensaje); // Mensaje de éxito
       setFormData({ // Reseteamos el formulario
         correo: "",
-        apellido: "",
-        nombre: "",
-        dni: "",
+        apellidoAspirante: "",
+        nombreAspirante: "",
+        dniAspirante: "",
         fechaNacimiento: "",
         apellidoTutor: "",
         nombreTutor: "",
         dniTutor: "",
         telefonoTutor: "",
       });
+      //navigate('/'); // Redirigir a la página de inicio o a otra página
     })
     .catch(error => {
       alert(error.response?.data?.error || "Error al registrar el aspirante");
