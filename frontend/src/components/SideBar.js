@@ -52,10 +52,10 @@ const Sidebar = () => {
         <li>
           <Link
             className={`nav-link text-white ${isActive("/admin/sorteados") ? "active" : ""}`}
-            to="/admin/sorteados"
+            to="/admin/sorteos"
           >
             <i className="bi bi-grid me-2"></i>
-            Sorteados
+            Historial de Sorteados
           </Link>
         </li>
         <li>

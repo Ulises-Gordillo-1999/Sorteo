@@ -14,7 +14,7 @@ function Sorteo() {
             const response = await api.post("http://localhost:5000/sorteo", { cantidad})
          console.log(response.data)
          setSeleccionados(response.data.seleccionados)
-         console.log(seleccionados)
+         //console.log(seleccionados)
         } catch (error) {
             console.error("Error al realizar el sorteo:", error);
             alert("Error al realizar el sorteo. Por favor, inténtelo de nuevo.");

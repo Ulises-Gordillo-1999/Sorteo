@@ -11,6 +11,10 @@ import Home from './pages/Home'; // Componente para la página principal
 import Profile from './pages/Profile'; // Componente para el perfil
 import Settings from './pages/Settings'; // Componente para configuraciones
 import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Componente para el formulario de aspirante
+import HistorialSorteos from "./pages/HistorialSorteos";
+import DetalleSorteo from "./pages/DetalleSorteo";
+
+
 
 function App() {
   return (
@@ -25,6 +29,8 @@ function App() {
           <Route path='/admin/aspirantes' element={<Aspirantes/>}/>
           <Route path='/admin/settings' element={<Settings/>}/>
           <Route path='/admin/sorteo' element={<Sorteo/>}/>
+          <Route path="/admin/sorteos" element={<HistorialSorteos />} />
+          <Route path="/admin/sorteos/:id" element={<DetalleSorteo />} />  
           <Route path="aspirantes/:id" element={<AspiranteFormWrapper />} />
           </Route>
           {/*Ruta publica */}
