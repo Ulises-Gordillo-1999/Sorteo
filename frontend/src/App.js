@@ -12,14 +12,16 @@ import Settings from './pages/Settings'; // Componente para configuraciones
 import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Componente para el formulario de aspirante
 import HistorialSorteos from "./pages/HistorialSorteos";
 import DetalleSorteo from "./pages/DetalleSorteo";
+import HomeUnca from './pages/HomeUnca';    
 
 
 
 function App() {
   return (
     <Router>
-      <div className="container-fluid mt-2 mx-auto ">
+      <div>
         <Routes>
+          <Route path="/" element={<HomeUnca />} />
           <Route path="/login" element={<Login />} />
           {/* Rutas Protegiddas */}
           <Route path="/admin" element={<PrivateRoute><Dashboard />{" "}</PrivateRoute>} >

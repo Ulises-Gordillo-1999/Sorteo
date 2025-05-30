@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import api from '../utils/axiosConfig';
+import ExportarExcelSeleccionados from '../components/ExportarExcelSeleccionados';
 
 const DetalleSorteo = () => {
   const { id } = useParams();
@@ -25,25 +26,26 @@ const DetalleSorteo = () => {
     <div className="card">
       <div className="card-header bg-secondary text-white">
         <h4>Detalle del Sorteo #{id}</h4>
+        <ExportarExcelSeleccionados titulares={titulares} suplentes={suplentes} />
       </div>
       <div className="card-body">
         <h5>Titulares</h5>
-        <ul className="list-group mb-4">
+        <ol className="list-group mb-4 list-group-numbered">
           {titulares.map(a => (
             <li key={`titular-${a.dni}`} className="list-group-item">
               {a.nombre} {a.apellido} – DNI: {a.dni}
             </li>
           ))}
-        </ul>
+        </ol>
 
         <h5>Suplentes</h5>
-        <ul className="list-group">
+        <ol className="list-group list-group-numbered">
           {suplentes.map(a => (
             <li key={`suplente-${a.dni}`} className="list-group-item">
               {a.nombre} {a.apellido} – DNI: {a.dni}
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </div>
   );

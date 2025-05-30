@@ -1,4 +1,5 @@
 const db = require("../../database/db");
+const { obtenerFechaArgentina } = require("../utils/fecha");
 
 class Aspirante {
   // 📌 Contar aspirantes registrados
@@ -15,10 +16,17 @@ class Aspirante {
       //console.log("Estamos en models",aspirante); // Para depuración
       //console.log("Fecha de nacimiento recibida:", aspirante.fecha_nacimiento); // Para depuración
       if (err) return callback(err, null);
-      if (total >= 250) return callback(new Error("Se alcanzó el límite de 250 aspirantes"), null);
+      if (total >= 250)
+        return callback(
+          new Error("Se alcanzó el límite de 250 aspirantes"),
+          null
+        );
+      const fecha_registro =
+        aspirante.fecha_registro || obtenerFechaArgentina();
+
       const sql = `INSERT INTO aspirantes 
-          (correo, apellido, nombre, dni, fecha_nacimiento, apellido_tutor, nombre_tutor, dni_tutor, telefono_tutor) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    (correo, apellido, nombre, dni, fecha_nacimiento, apellido_tutor, nombre_tutor, dni_tutor, telefono_tutor, fecha_registro) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
       db.run(
         sql,
@@ -31,7 +39,8 @@ class Aspirante {
           aspirante.apellido_tutor,
           aspirante.nombre_tutor,
           aspirante.dni_tutor,
-          aspirante.telefono_tutor
+          aspirante.telefono_tutor,
+          fecha_registro,
         ],
         function (err) {
           if (err) {

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../../database/db");
+const { obtenerFechaArgentina } = require("../utils/fecha"); // si no está importado, agregalo
 
 // 📌 Obtener por numero de sorteo realizado
 // 📌 Obtener los titulares y suplentes de un sorteo
@@ -24,8 +25,6 @@ router.get("/seleccionados/:id", (req, res) => {
   });
 });
 
-
-
 // 📌 Obtener todos los sorteos realizados
 router.get("/", (req, res) => {
   db.all("SELECT * FROM sorteados", [], (err, sorteados) => {
@@ -37,10 +36,19 @@ router.get("/", (req, res) => {
 
 // 📌 Ejecutar el sorteo
 router.post("/", (req, res) => {
-  const { cantidad } = req.body;
+  const { cantidad, suplentes } = req.body;
 
   if (!cantidad || cantidad <= 0) {
     return res.status(400).json({ error: "Cantidad de sorteados inválida" });
+  }
+
+  const totalSuplentes = suplentes ?? 10; // Por defecto 10 suplentes
+  const totalTitulares = cantidad - totalSuplentes;
+
+  if (totalTitulares < 0) {
+    return res
+      .status(400)
+      .json({ error: "Cantidad de suplentes supera a la cantidad total" });
   }
 
   db.all("SELECT * FROM aspirantes", [], (err, aspirantes) => {
@@ -58,9 +66,10 @@ router.post("/", (req, res) => {
       .sort(() => Math.random() - 0.5)
       .slice(0, cantidad);
 
+    const fecha_sorteo = obtenerFechaArgentina();
     // 📌 Guardar el sorteo en la base de datos
     // Guardar el sorteo en la base de datos
-    db.run("INSERT INTO sorteos DEFAULT VALUES", [], function (err) {
+    db.run("INSERT INTO sorteos (fecha_sorteo) VALUES (?)", [fecha_sorteo], function (err) {
       if (err)
         return res.status(500).json({ error: "Error al registrar el sorteo" });
 
@@ -71,7 +80,7 @@ router.post("/", (req, res) => {
       );
 
       seleccionados.forEach((aspirante, index) => {
-        const tipo = index < 20 ? "titular" : "suplente";
+        const tipo = index < totalTitulares ? "titular" : "suplente";
         insertStmt.run(sorteo_id, aspirante.id, tipo);
       });
 

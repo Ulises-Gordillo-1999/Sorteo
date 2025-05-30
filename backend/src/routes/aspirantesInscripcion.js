@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const Aspirante = require("../models/Aspirante");
 
+
+
 // Agregar un aspirante
 router.post("/", (req, res) => {
   console.log("Datos recibidos:", req.body); // Para depuración
