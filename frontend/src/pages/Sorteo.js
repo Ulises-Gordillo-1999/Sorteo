@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import api from "../utils/axiosConfig";
 import ExportarExcel from "../components/ExportarExcel";
 
@@ -6,6 +6,15 @@ function Sorteo() {
   const [cantidad, setCantidad] = useState(35);
   const [suplentes, setSuplentes] = useState(10);
   const [seleccionados, setSeleccionados] = useState([]);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+  if (seleccionados.length > 0) {
+    setShowSuccess(true);
+    const timer = setTimeout(() => setShowSuccess(false), 10000);
+    return () => clearTimeout(timer);
+  }
+}, [seleccionados]);
 
   const realizarSorteo = async () => {
     try {
@@ -64,18 +73,9 @@ function Sorteo() {
         <button className="btn btn-success" onClick={realizarSorteo}>
           Ejecutar Sorteo
         </button>
-
-        {seleccionados.length > 0 && (
-          <div className="mt-4">
-            <h4>Seleccionados:</h4>
-            <ExportarExcel datos={seleccionados} />
-            <ul className="list-group">
-              {seleccionados.map((asp) => (
-                <li key={asp.id} className="list-group-item">
-                  {asp.nombre} - {asp.dni}
-                </li>
-              ))}
-            </ul>
+        {showSuccess && (
+          <div className="alert alert-success mt-4" role="alert">
+            Sorteo realizado exitosamente.
           </div>
         )}
       </div>
