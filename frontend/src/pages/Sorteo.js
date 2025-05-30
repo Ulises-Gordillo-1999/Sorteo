@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "../utils/axiosConfig";
-import ExportarExcel from "../components/ExportarExcel";
+
 
 function Sorteo() {
   const [cantidad, setCantidad] = useState(35);
