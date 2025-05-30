@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
 import Aspirantes from "./pages/Aspirantes";
 import Sorteo from "./pages/Sorteo";
 import FormularioAspirante from "./components/FormularioAspirante";
