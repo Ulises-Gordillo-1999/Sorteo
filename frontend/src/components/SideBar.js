@@ -10,7 +10,7 @@ const Sidebar = () => {
 
   return (
     <div
-      className="d-flex flex-column flex-shrink-0 h-75 p-3 text-white bg-dark"
+      className="d-flex flex-column flex-shrink-0 h-100 p-3 text-white bg-dark"
       style={{ width: "280px" }}
     >
       <Link
