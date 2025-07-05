@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const enviarCorreo = require("../utils/mailer");
 const Aspirante = require("../models/Aspirante");
-
-
 
 // Agregar un aspirante
 router.post("/", (req, res) => {
@@ -56,9 +55,20 @@ router.post("/", (req, res) => {
     telefono_tutor,
   };
 
-  Aspirante.agregar(nuevoAspirante, (err, id) => {
+  Aspirante.agregar(nuevoAspirante, async (err, id) => {
     if (err) return res.status(400).json({ error: err.message });
     res.json({ mensaje: "Aspirante registrado con éxito", id });
+
+    //Envio de mail de confirmacion de registro
+    await enviarCorreo(
+      nuevoAspirante.correo,
+      "Confirmación de Preinscripción",
+      `<p>Hola ${nuevoAspirante.nombre_tutor},</p>
+   <p>Se ha registrado correctamente la preinscripción del aspirante <strong>${nuevoAspirante.nombre} ${nuevoAspirante.apellido}</strong>.</p>
+   <p><strong>DNI:</strong> ${nuevoAspirante.dni} <br>
+   <strong>Fecha de nacimiento:</strong> ${nuevoAspirante.fecha_nacimiento}</p>
+   <p>Gracias por registrarse.</p>`
+    );
   });
 });
 
