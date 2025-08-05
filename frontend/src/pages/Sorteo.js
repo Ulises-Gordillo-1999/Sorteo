@@ -1,20 +1,19 @@
 import React, { useState, useEffect } from "react";
 import api from "../utils/axiosConfig";
 
-
 function Sorteo() {
-  const [cantidad, setCantidad] = useState(35);
-  const [suplentes, setSuplentes] = useState(10);
+  const [cantidad, setCantidad] = useState(2);
+  const [suplentes, setSuplentes] = useState(1);
   const [seleccionados, setSeleccionados] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
-  if (seleccionados.length > 0) {
-    setShowSuccess(true);
-    const timer = setTimeout(() => setShowSuccess(false), 10000);
-    return () => clearTimeout(timer);
-  }
-}, [seleccionados]);
+    if (seleccionados.length > 0) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 10000);
+      return () => clearTimeout(timer);
+    }
+  }, [seleccionados]);
 
   const realizarSorteo = async () => {
     try {
@@ -22,9 +21,18 @@ function Sorteo() {
         cantidad,
         suplentes,
       });
-      console.log(response.data);
-      setSeleccionados(response.data.seleccionados);
-      //console.log(seleccionados)
+
+      const data = response.data?.seleccionados;
+      console.log(data)
+      console.log(response)
+
+      if (data && data.length > 0) {
+        localStorage.setItem("seleccionados", JSON.stringify(data));
+        setSeleccionados(data);
+        //navigate("/admin/ejecucionsorteo");
+      } else {
+        alert("No se recibieron datos del sorteo.");
+      }
     } catch (error) {
       console.error("Error al realizar el sorteo:", error);
       alert("Error al realizar el sorteo. Por favor, inténtelo de nuevo.");

@@ -91,10 +91,3 @@ const Login = () => {
 };
 
 export default Login;
-/*
-<form onSubmit={handleSubmit}>
-      <input type="text" placeholder="Username" onChange={e => setForm({...form, username: e.target.value})} required />
-      <input type="password" placeholder="Password" onChange={e => setForm({...form, password: e.target.value})} required />
-      <button type="submit">Login</button>
-    </form>
-*/

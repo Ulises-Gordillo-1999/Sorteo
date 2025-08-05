@@ -51,6 +51,15 @@ const Sidebar = () => {
         </li>
         <li>
           <Link
+            className={`nav-link text-white ${isActive("/admin/ejecucionsorteo") ? "active" : ""}`}
+            to="/admin/ejecucionsorteo"
+          >
+            <i className="bi bi-table me-2"></i>
+            Ejecucion Sorteo
+          </Link>
+        </li>
+        <li>
+          <Link
             className={`nav-link text-white ${isActive("/admin/sorteados") ? "active" : ""}`}
             to="/admin/sorteos"
           >

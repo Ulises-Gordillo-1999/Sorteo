@@ -13,6 +13,7 @@ import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Compone
 import HistorialSorteos from "./pages/HistorialSorteos";
 import DetalleSorteo from "./pages/DetalleSorteo";
 import HomeUnca from './pages/HomeUnca';    
+import AnimacionSorteo from "./pages/AnimacionSorteo";
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/admin/aspirantes' element={<Aspirantes/>}/>
           <Route path='/admin/settings' element={<Settings/>}/>
           <Route path='/admin/sorteo' element={<Sorteo/>}/>
+          <Route path="/admin/ejecucionsorteo" element={<AnimacionSorteo />} />
           <Route path="/admin/sorteos" element={<HistorialSorteos />} />
           <Route path="/admin/sorteos/:id" element={<DetalleSorteo />} />  
           <Route path="aspirantes/:id" element={<AspiranteFormWrapper />} />
