@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import api from "../utils/axiosConfig";
 
 function Sorteo() {
-  const [cantidad, setCantidad] = useState(2);
-  const [suplentes, setSuplentes] = useState(1);
+  const [cantidad, setCantidad] = useState(35);
+  const [suplentes, setSuplentes] = useState(10);
   const [seleccionados, setSeleccionados] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -51,7 +51,7 @@ function Sorteo() {
             type="number"
             className="form-control"
             value={cantidad}
-            onChange={(e) => setCantidad(e.target.value)}
+            onChange={(e) => setCantidad(Number(e.target.value))}
           />
         </div>
         <div className="mb-3">
@@ -60,7 +60,7 @@ function Sorteo() {
             type="number"
             className="form-control"
             value={suplentes}
-            onChange={(e) => setSuplentes(e.target.value)}
+            onChange={(e) => setSuplentes(Number(e.target.value))}
           />
         </div>
         <div className="mb-3">

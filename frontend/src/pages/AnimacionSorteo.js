@@ -11,7 +11,7 @@ export default function AnimacionSorteo() {
     if (data) {
       setSeleccionados(JSON.parse(data));
     } else {
-      window.location.href = "/"; // fallback si no hay datos
+      //window.location.href = "/"; // fallback si no hay datos
     }
   }, []);
 
