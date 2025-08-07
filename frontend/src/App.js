@@ -13,16 +13,19 @@ import AspiranteFormWrapper from "./components/AspiranteFormWrapper"; // Compone
 import HistorialSorteos from "./pages/HistorialSorteos";
 import DetalleSorteo from "./pages/DetalleSorteo";
 import HomeUnca from './pages/HomeUnca';    
+import HomeUnca1 from './pages/HomeUnca1';    
 import AnimacionSorteo from "./pages/AnimacionSorteo";
+import ScrollToTop from './components/ScrollToTop';
 
 
 
 function App() {
   return (
     <Router>
+      <ScrollToTop/> 
       <div>
         <Routes>
-          <Route path="/" element={<HomeUnca />} />
+          <Route path="/" element={<HomeUnca1 />} />
           <Route path="/login" element={<Login />} />
           {/* Rutas Protegiddas */}
           <Route path="/admin" element={<PrivateRoute><Dashboard />{" "}</PrivateRoute>} >
