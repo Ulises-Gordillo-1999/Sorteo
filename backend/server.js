@@ -31,9 +31,14 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json())
 
+
+
+
 //rutas publicas
 app.use('/auth', authRoutes); // 📌 Usamos la ruta para autenticar usuarios
 app.use("/inscripcion", aspirantesRoutes);
+app.use('/uploads', express.static('uploads'));
+
 
 //rutas protegidas
 app.use('/aspirantes', authMiddleware, aspirantes_CRUD_Routes); // 📌 Usamos la ruta para listar aspirantes

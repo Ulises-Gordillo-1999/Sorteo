@@ -2,8 +2,83 @@ const express = require("express");
 const router = express.Router();
 const enviarCorreo = require("../utils/mailer");
 const Aspirante = require("../models/Aspirante");
+const upload = require("../middleware/upload"); 
 
-// Agregar un aspirante
+// POST /inscripcion (pública) - multipart/form-data
+router.post("/", upload.single("dniFile"), async (req, res) => {
+  try {
+    // 1) Datos del body (texto)
+    const {
+      correo,
+      apellidoAspirante: apellido,
+      nombreAspirante: nombre,
+      dniAspirante: dni,
+      fechaNacimiento: fecha_nacimiento,
+      apellidoTutor: apellido_tutor,
+      nombreTutor: nombre_tutor,
+      dniTutor: dni_tutor,
+      telefonoTutor: telefono_tutor,
+    } = req.body;
+
+    // 2) Validaciones mínimas
+    if (
+      !correo || !apellido || !nombre || !dni || !fecha_nacimiento ||
+      !apellido_tutor || !nombre_tutor || !dni_tutor || !telefono_tutor
+    ) {
+      return res.status(400).json({ error: "Todos los campos son obligatorios" });
+    }
+
+    // 3) Archivo adjunto (obligatorio)
+    if (!req.file) {
+      return res.status(400).json({ error: "Adjunte imagen o PDF del DNI (dniFile)" });
+    }
+
+    // 4) Armar objeto para BD (incluye ruta del archivo)
+    const nuevoAspirante = {
+      correo,
+      apellido,
+      nombre,
+      dni,
+      fecha_nacimiento,
+      apellido_tutor,
+      nombre_tutor,
+      dni_tutor,
+      telefono_tutor,
+      dni_path: req.file.path, // ← guarda la ruta del archivo
+    };
+
+    // 5) Guardar en BD
+    Aspirante.agregar(nuevoAspirante, async (err, id) => {
+      if (err) return res.status(400).json({ error: err.message });
+
+      // Respondemos rápido al front (no lo hacemos esperar al correo)
+      res.json({ mensaje: "Aspirante registrado con éxito", id });
+
+      // 6) Enviar correo en segundo plano (sin romper si falla)
+      try {
+        await enviarCorreo(
+          nuevoAspirante.correo,
+          "Confirmación de Preinscripción",
+          `<p>Hola ${nuevoAspirante.nombre_tutor},</p>
+            <p>Se ha registrado correctamente la preinscripción del aspirante <strong>${nuevoAspirante.nombre} ${nuevoAspirante.apellido}</strong>.</p>
+            <p><strong>DNI:</strong> ${nuevoAspirante.dni}<br>
+            <strong>Fecha de nacimiento:</strong> ${nuevoAspirante.fecha_nacimiento}</p>
+            <p>Gracias por registrarse.</p>`
+        );
+      } catch (e) {
+        console.error("Error al enviar correo de confirmación:", e.message);
+      }
+    });
+  } catch (e) {
+    console.error("Error en /inscripcion:", e);
+    return res.status(500).json({ error: "Error al procesar la inscripción" });
+  }
+});
+
+module.exports = router;
+
+
+/*// Agregar un aspirante
 router.post("/", (req, res) => {
   console.log("Datos recibidos:", req.body); // Para depuración
   const {
@@ -73,3 +148,4 @@ router.post("/", (req, res) => {
 });
 
 module.exports = router;
+*/

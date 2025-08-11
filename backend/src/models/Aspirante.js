@@ -25,8 +25,8 @@ class Aspirante {
         aspirante.fecha_registro || obtenerFechaArgentina();
 
       const sql = `INSERT INTO aspirantes 
-    (correo, apellido, nombre, dni, fecha_nacimiento, apellido_tutor, nombre_tutor, dni_tutor, telefono_tutor, fecha_registro) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    (correo, apellido, nombre, dni, fecha_nacimiento, apellido_tutor, nombre_tutor, dni_tutor, telefono_tutor, dni_path, fecha_registro) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
       db.run(
         sql,
@@ -40,6 +40,7 @@ class Aspirante {
           aspirante.nombre_tutor,
           aspirante.dni_tutor,
           aspirante.telefono_tutor,
+          aspirante.dni_path || null,
           fecha_registro,
         ],
         function (err) {
