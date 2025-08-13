@@ -16,6 +16,7 @@
  */
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require('dotenv').config();
 const bodyParser = require('body-parser')
 const aspirantesRoutes = require("./src/routes/aspirantesInscripcion");
@@ -44,8 +45,16 @@ app.use('/uploads', express.static('uploads'));
 app.use('/aspirantes', authMiddleware, aspirantes_CRUD_Routes); // 📌 Usamos la ruta para listar aspirantes
 app.use("/sorteo", authMiddleware ,sorteoRoutes);  // 📌 Usamos la ruta para realizar sorteos
 
+// ===== Servir el build de React =====
+app.use(express.static(path.join(__dirname, "../frontend/build")));
 
-const PORT = 5000;
+// Fallback para React Router (SIEMPRE al final)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+});
+
+
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
