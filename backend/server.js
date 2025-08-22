@@ -46,11 +46,11 @@ app.use('/aspirantes', authMiddleware, aspirantes_CRUD_Routes); // 📌 Usamos l
 app.use("/sorteo", authMiddleware ,sorteoRoutes);  // 📌 Usamos la ruta para realizar sorteos
 
 // ===== Servir el build de React =====
-app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.use(express.static(path.join(__dirname, "/public/build")));
 
 // Fallback para React Router (SIEMPRE al final)
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/build", "index.html"));
+  res.sendFile(path.join(__dirname, "/public/build", "index.html"));
 });
 
 
