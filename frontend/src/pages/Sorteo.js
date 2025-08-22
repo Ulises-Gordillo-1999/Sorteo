@@ -17,7 +17,7 @@ function Sorteo() {
 
   const realizarSorteo = async () => {
     try {
-      const response = await api.post("http://localhost:5000/sorteo", {
+      const response = await api.post("/sorteo", {
         cantidad,
         suplentes,
       });

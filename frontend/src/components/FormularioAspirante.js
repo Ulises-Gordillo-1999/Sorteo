@@ -61,7 +61,7 @@ const FormularioAspirante = () => {
     fd.append("dniFile", formData.dniFile); // ← archivo
 
     try {
-      const { data } = await axios.post("http://localhost:5000/inscripcion", fd, {
+      const { data } = await axios.post("/inscripcion", fd, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
