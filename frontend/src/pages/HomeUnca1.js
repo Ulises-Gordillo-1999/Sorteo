@@ -54,8 +54,7 @@ function Home() {
                 </h5>
                 <ul className="list-unstyled mt-3">
                   <li>
-                    📅 <strong>Lunes 9 de septiembre:</strong> apertura de
-                    preinscripciones
+                    📅 <strong>Preinscripciones:</strong> Lunes 1 de septiembre
                   </li>
                   <li>
                     👶 <strong>Edad:</strong> hasta el 30 de junio de 2026
@@ -89,7 +88,7 @@ function Home() {
                 </h5>
                 <ul className="list-unstyled mt-3">
                   <li>
-                    🎯 <strong>Sorteo:</strong> jueves 19 de septiembre – 10:00
+                    🎯 <strong>Sorteo:</strong> miercoles 10 de septiembre – 10:00
                     h
                   </li>
                   <li>
@@ -103,13 +102,13 @@ function Home() {
                     </a>
                   </li>
                   <li>
-                    🎟️ <strong>Vacantes:</strong> X titulares y 10 suplentes
+                    🎟️ <strong>Vacantes:</strong> 20 titulares y 10 suplentes
                   </li>
                   <li>
-                    📃 <strong>Listado:</strong> www.sorteo4añosfray.unca.edu.ar
+                    📢 <strong>Resultados:</strong> web oficial de la UNCA y correo electronico
                   </li>
                   <li>
-                    📢 <strong>Resultados:</strong> web oficial de la UNCA
+                    📅 <strong>Inscripciones:</strong> Padres o tutores de aspirantes sorteados deben retirar requisitos de inscripción el miércoles 17/09, de 09:00 a 11:00 hs
                   </li>
                 </ul>
               </div>
@@ -124,7 +123,7 @@ function Home() {
           </h5>
           <ul className="list-unstyled">
             <li>📄 DNI del niño/a aspirante</li>
-            <li>📎 Imagen del DNI para adjuntar</li>
+            <li>📎 Imagen del frente del DNI para adjuntar</li>
           </ul>
         </div>
 
