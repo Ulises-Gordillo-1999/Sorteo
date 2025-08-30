@@ -1,4 +1,5 @@
-FROM node:alpine
+FROM node:18-bullseye
+
 # Instalar herramientas de compilación
 RUN apt-get update && apt-get install -y \
     python3 \
@@ -21,11 +22,13 @@ COPY package*.json ./
 RUN npm cache clean --force && \
     npm install --legacy-peer-deps --verbose
 
+#COPY database/ ./database/
+
 # Copiar el resto del código
 COPY . .
 
 # Exponer el puerto
-EXPOSE 3001
+EXPOSE 4000
 
 # Comando para ejecutar la aplicación
 CMD ["node", "server.js"]

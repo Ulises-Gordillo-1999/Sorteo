@@ -1,12 +1,14 @@
-
 services:
   backend:
     build: .
-    container_name: sorteo-backend
+    container_name: sorteo-back-front
     restart: unless-stopped
     ports:
       - "4000:4000"
     volumes:
-      - /home/container/projects/volumenes/sorteo/database:/app/database
+      - sorteodb:/app/database
     environment:
       - NODE_ENV=production
+volumes:
+  sorteodb:
+
