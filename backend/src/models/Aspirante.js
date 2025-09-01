@@ -16,9 +16,9 @@ class Aspirante {
       //console.log("Estamos en models",aspirante); // Para depuración
       //console.log("Fecha de nacimiento recibida:", aspirante.fecha_nacimiento); // Para depuración
       if (err) return callback(err, null);
-      if (total >= 250)
+      if (total >= 150)
         return callback(
-          new Error("Se alcanzó el límite de 250 aspirantes"),
+          new Error("Se alcanzó el límite de 150 aspirantes"),
           null
         );
       const fecha_registro =
