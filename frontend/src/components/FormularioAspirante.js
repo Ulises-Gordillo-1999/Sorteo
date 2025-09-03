@@ -23,7 +23,12 @@ const FormularioAspirante = () => {
       const file = files?.[0];
       if (!file) return;
       // Validación simple: tipos y tamaño (2MB)
-      const okTypes = ["image/jpeg", "image/png", "image/webp", "application/pdf"];
+      const okTypes = [
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+        "application/pdf",
+      ];
       if (!okTypes.includes(file.type)) {
         alert("El DNI debe ser imagen (jpg, png, webp) o PDF.");
         e.target.value = "";
@@ -91,138 +96,146 @@ const FormularioAspirante = () => {
     <div className="container mt-4">
       <h2 className="text-center">Solicitud de Preinscripción 2026</h2>
       <p className="text-muted text-center">
-        La información solicitada a continuación es necesaria para realizar la preinscripción.
+        La información solicitada a continuación es necesaria para realizar la
+        preinscripción.
       </p>
 
-      <form onSubmit={handleSubmit} className="p-4 border rounded shadow bg-light">
-        {/* Sección 1 - Correo */}
-        <h4>Correo Electrónico</h4>
-        <div className="mb-3">
-          <label className="form-label">Correo *</label>
-          <input
-            type="email"
-            className="form-control"
-            name="correo"
-            value={formData.correo}
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <form
+        onSubmit={handleSubmit}
+        className="p-4 border rounded shadow bg-light"
+      >
+        <fieldset disabled>
+          {/* Sección 1 - Correo */}
+          <h4>Correo Electrónico</h4>
+          <div className="mb-3">
+            <label className="form-label">Correo *</label>
+            <input
+              type="email"
+              className="form-control"
+              name="correo"
+              value={formData.correo}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {/* Sección 2 - Datos del Aspirante */}
-        <h4>Datos del Aspirante</h4>
-        <div className="mb-3">
-          <label className="form-label">Apellido/s del aspirante *</label>
-          <input
-            type="text"
-            className="form-control"
-            name="apellidoAspirante"
-            value={formData.apellidoAspirante}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Nombre/s del aspirante *</label>
-          <input
-            type="text"
-            className="form-control"
-            name="nombreAspirante"
-            value={formData.nombreAspirante}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Número de DNI *</label>
-          <input
-            type="number"
-            className="form-control"
-            name="dniAspirante"
-            value={formData.dniAspirante}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Fecha de nacimiento *</label>
-          <input
-            type="date"
-            className="form-control"
-            name="fechaNacimiento"
-            value={formData.fechaNacimiento}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          {/* Sección 2 - Datos del Aspirante */}
+          <h4>Datos del Aspirante</h4>
+          <div className="mb-3">
+            <label className="form-label">Apellido/s del aspirante *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="apellidoAspirante"
+              value={formData.apellidoAspirante}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Nombre/s del aspirante *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="nombreAspirante"
+              value={formData.nombreAspirante}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Número de DNI *</label>
+            <input
+              type="number"
+              className="form-control"
+              name="dniAspirante"
+              value={formData.dniAspirante}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Fecha de nacimiento *</label>
+            <input
+              type="date"
+              className="form-control"
+              name="fechaNacimiento"
+              value={formData.fechaNacimiento}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {/* Sección 3 - Datos del Tutor */}
-        <h4>Datos del Tutor/a</h4>
-        <div className="mb-3">
-          <label className="form-label">Apellido/s del tutor *</label>
-          <input
-            type="text"
-            className="form-control"
-            name="apellidoTutor"
-            value={formData.apellidoTutor}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Nombre/s del tutor *</label>
-          <input
-            type="text"
-            className="form-control"
-            name="nombreTutor"
-            value={formData.nombreTutor}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Número de DNI del tutor *</label>
-          <input
-            type="number"
-            className="form-control"
-            name="dniTutor"
-            value={formData.dniTutor}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-3">
-          <label className="form-label">Número de teléfono del tutor *</label>
-          <input
-            type="tel"
-            className="form-control"
-            name="telefonoTutor"
-            value={formData.telefonoTutor}
-            onChange={handleChange}
-            required
-          />
-        </div>
+          {/* Sección 3 - Datos del Tutor */}
+          <h4>Datos del Tutor/a</h4>
+          <div className="mb-3">
+            <label className="form-label">Apellido/s del tutor *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="apellidoTutor"
+              value={formData.apellidoTutor}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Nombre/s del tutor *</label>
+            <input
+              type="text"
+              className="form-control"
+              name="nombreTutor"
+              value={formData.nombreTutor}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Número de DNI del tutor *</label>
+            <input
+              type="number"
+              className="form-control"
+              name="dniTutor"
+              value={formData.dniTutor}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label className="form-label">Número de teléfono del tutor *</label>
+            <input
+              type="tel"
+              className="form-control"
+              name="telefonoTutor"
+              value={formData.telefonoTutor}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-        {/* Sección 4 - DNI adjunto */}
-        <h4>Adjunto</h4>
-        <div className="mb-3">
-          <label className="form-label">Adjuntar DNI (imagen o PDF) *</label>
-          <input
-            ref={fileInputRef}
-            type="file"
-            name="dniFile"
-            accept="image/*,application/pdf"
-            className="form-control"
-            onChange={handleChange}
-            required
-          />
-          <small className="text-muted">Máximo 2MB. Formatos: JPG, PNG, WEBP o PDF.</small>
-        </div>
+          {/* Sección 4 - DNI adjunto */}
+          <h4>Adjunto</h4>
+          <div className="mb-3">
+            <label className="form-label">Adjuntar DNI (imagen o PDF) *</label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              name="dniFile"
+              accept="image/*,application/pdf"
+              className="form-control"
+              onChange={handleChange}
+              required
+            />
+            <small className="text-muted">
+              Máximo 2MB. Formatos: JPG, PNG, WEBP o PDF.
+            </small>
+          </div>
 
-        {/* Botón de envío */}
-        <button type="submit" className="btn btn-primary w-100">
-          Enviar Solicitud
-        </button>
+          {/* Botón de envío */}
+          <button type="submit" className="btn btn-primary w-100">
+            Enviar Solicitud
+          </button>
+        </fieldset>
       </form>
     </div>
   );
