@@ -54,7 +54,7 @@ function Home() {
                 </h5>
                 <ul className="list-unstyled mt-3">
                   <li>
-                    📅 <strong>Preinscripciones:</strong> Lunes 1 de septiembre
+                    📅 <strong>Preinscripciones:</strong> Lunes 8 de septiembre
                   </li>
                   <li>
                     👶 <strong>Edad:</strong> hasta el 30 de junio de 2026
@@ -63,8 +63,8 @@ function Home() {
                     🌐 <strong>Modalidad:</strong> formulario electrónico
                   </li>
                   <li>
-                    🔢 <strong>Cupos:</strong> 150 (desde 08:00 hasta 23:00 del
-                    martes)
+                    🔢 <strong>Cupos:</strong> 150 (desde 08:00 del lunes 8/9 hasta 23:00 del
+                    martes 9/9)
                   </li>
                   <li>
                     ⚠️ <strong>Importante:</strong> no se permite duplicación
@@ -88,8 +88,7 @@ function Home() {
                 </h5>
                 <ul className="list-unstyled mt-3">
                   <li>
-                    🎯 <strong>Sorteo:</strong> miercoles 10 de septiembre – 10:00
-                    h
+                    🎯 <strong>Sorteo:</strong> miercoles 17 de septiembre – 10:00hs
                   </li>
                   <li>
                     📺 <strong>Transmisión:</strong>{" "}
@@ -108,7 +107,7 @@ function Home() {
                     📢 <strong>Resultados:</strong> web oficial de la UNCA y correo electronico
                   </li>
                   <li>
-                    📅 <strong>Inscripciones:</strong> Padres o tutores de aspirantes sorteados deben retirar requisitos de inscripción el miércoles 17/09, de 09:00 a 11:00 hs
+                    📅 <strong>Inscripciones:</strong> Padres o tutores de aspirantes sorteados deben retirar requisitos de inscripción el miércoles 25 de septiembre, de 09:00 a 11:00hs en la escuela
                   </li>
                 </ul>
               </div>
