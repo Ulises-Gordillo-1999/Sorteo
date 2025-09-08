@@ -104,7 +104,7 @@ const FormularioAspirante = () => {
         onSubmit={handleSubmit}
         className="p-4 border rounded shadow bg-light"
       >
-        <fieldset >
+        <fieldset>
           {/* Sección 1 - Correo */}
           <h4>Correo Electrónico</h4>
           <div className="mb-3">
