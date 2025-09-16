@@ -1,4 +1,5 @@
 // SorteoAnimado.js
+
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,6 +9,7 @@ const SorteoAnimado = ({ seleccionados = [], onFinish }) => {
 
   useEffect(() => {
     if (seleccionados.length === 0) return;
+    console.log(seleccionados)
     let i = 0;
     const intervalo = setInterval(() => {
       setActualIndex(i);
@@ -36,6 +38,7 @@ const SorteoAnimado = ({ seleccionados = [], onFinish }) => {
           {actualIndex >= 0 && seleccionados[actualIndex] ? (
             <div>
               <h4>
+                N° orden{seleccionados[actualIndex].aspirante_id} - 
                 {seleccionados[actualIndex].apellido},{" "}
                 {seleccionados[actualIndex].nombre}
               </h4>
@@ -60,7 +63,7 @@ const SorteoAnimado = ({ seleccionados = [], onFinish }) => {
               key={i}
               className="list-group-item d-flex justify-content-between align-items-center"
             >
-              {a.apellido}, {a.nombre}
+             N° orden {a.aspirante_id} - {a.apellido}, {a.nombre}
               <span className="badge bg-secondary">{a.tipo}</span>
             </li>
           ))}

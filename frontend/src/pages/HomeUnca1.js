@@ -2,11 +2,13 @@ import React from "react";
 import logoUnca from "../images/logo_unca.jpg";
 import logoSA from "../images/LOGO_SA_OFICIAL.jpg";
 import imageUnca from "../images/UNCA.jpg";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
+const LISTADO_URL = "https://docs.google.com/spreadsheets/d/1rmxWP1TvgtQ7pP8UjtQOaBp1jG5YePD50MebEyhQUDI/edit?usp=sharing"; // ⬅️ Reemplazar por el link real
 
 function Home() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   return (
     <div className="bg-light d-flex flex-column min-vh-100">
       <main className="container py-5 flex-grow-1">
@@ -63,8 +65,8 @@ function Home() {
                     🌐 <strong>Modalidad:</strong> formulario electrónico
                   </li>
                   <li>
-                    🔢 <strong>Cupos:</strong> 150 (desde 08:00 del lunes 8/9 hasta 23:00 del
-                    martes 9/9)
+                    🔢 <strong>Cupos:</strong> 150 (desde 08:00 del lunes 8/9
+                    hasta 23:00 del martes 9/9)
                   </li>
                   <li>
                     ⚠️ <strong>Importante:</strong> no se permite duplicación
@@ -88,7 +90,8 @@ function Home() {
                 </h5>
                 <ul className="list-unstyled mt-3">
                   <li>
-                    🎯 <strong>Sorteo:</strong> miercoles 17 de septiembre – 10:00hs
+                    🎯 <strong>Sorteo:</strong> miércoles 17 de septiembre –
+                    10:00hs
                   </li>
                   <li>
                     📺 <strong>Transmisión:</strong>{" "}
@@ -104,10 +107,13 @@ function Home() {
                     🎟️ <strong>Vacantes:</strong> 20 titulares y 10 suplentes
                   </li>
                   <li>
-                    📢 <strong>Resultados:</strong> web oficial de la UNCA y correo electronico
+                    📢 <strong>Resultados:</strong> web oficial de la UNCA y
+                    correo electrónico
                   </li>
                   <li>
-                    📅 <strong>Inscripciones:</strong> Padres o tutores de aspirantes sorteados deben retirar requisitos de inscripción el miércoles 25 de septiembre, de 09:00 a 11:00hs en la escuela
+                    📅 <strong>Inscripciones:</strong> Padres/tutores de
+                    aspirantes sorteados deben retirar requisitos el miércoles
+                    25 de septiembre, de 09:00 a 11:00 hs en la escuela
                   </li>
                 </ul>
               </div>
@@ -115,25 +121,76 @@ function Home() {
           </div>
         </div>
 
-        {/* Recordatorio */}
-        <div className="mb-4 text-center">
-          <h5 className="fw-bold">
-            Antes de comenzar, asegúrese de tener a mano:
-          </h5>
-          <ul className="list-unstyled">
-            <li>📄 DNI del niño/a aspirante</li>
-            <li>📎 Imagen del frente del DNI para adjuntar</li>
-          </ul>
-        </div>
+        
+        {/* Recordatorio y botón deshabilitados temporalmente
+<div className="mb-4 text-center">
+  <h5 className="fw-bold">Antes de comenzar, asegúrese de tener a mano:</h5>
+  <ul className="list-unstyled">
+    <li>📄 DNI del niño/a aspirante</li>
+    <li>📎 Imagen del frente del DNI para adjuntar</li>
+  </ul>
+</div>
 
-        {/* Botón */}
-        <div className="text-center mb-5">
-          <button
-            className="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill shadow"
-            onClick={() => navigate('/inscripcion')}
-          >
-            Acceder al Formulario de Preinscripción
-          </button>
+<div className="text-center mb-5">
+  <button
+    className="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill shadow"
+    onClick={() => navigate('/inscripcion')}
+  >
+    Acceder al Formulario de Preinscripción
+  </button>
+</div>
+*/}
+
+        {/* Aviso + Listado depurado */}
+        <div className="mb-4">
+          <div className="card border-0 rounded-4 shadow-sm">
+            <div className="card-body">
+              <h5 className="card-title fw-bold text-primary mb-3">
+                Listado depurado y aviso de sorteo
+              </h5>
+
+              {/* Versión breve */}
+              <p className="mb-2">
+                <strong>Miércoles 17/09 – 10:00 hs:</strong> sorteo de
+                aspirantes (sala de 4, ciclo 2026) en el CMU, con transmisión en
+                vivo por{" "}
+                <a
+                  href="https://www.youtube.com/@UNCATV"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  UNCA TV
+                </a>
+                .
+              </p>
+
+              {/* Aclaraciones clave */}
+              <ul className="mb-3">
+                <li>
+                  Se sortearán <strong>20 titulares</strong> y{" "}
+                  <strong>10 suplentes</strong> entre quienes completaron
+                  correctamente el formulario.
+                </li>
+                <li>
+                  El <strong>número de orden</strong> del listado es el número
+                  asignado para participar en el sorteo.
+                </li>
+                <li>
+                  Si no figurás en el listado es por{" "}
+                  <strong>errores en la carga</strong> de los datos requeridos.
+                </li>
+              </ul>
+
+              <a
+                className="btn btn-outline-primary fw-semibold rounded-pill px-4"
+                href={LISTADO_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver listado depurado de preinscriptos/as
+              </a>
+            </div>
+          </div>
         </div>
       </main>
 
