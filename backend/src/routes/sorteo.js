@@ -35,7 +35,8 @@ router.get("/", (req, res) => {
   });
 });
 
-// 📌 Ejecutar el sorteo
+
+// 📌 Ejecutar el sorteo asincrónico (Opción 1)
 router.post("/", (req, res) => {
   const { cantidad, suplentes } = req.body;
 
@@ -62,14 +63,14 @@ router.post("/", (req, res) => {
         .json({ error: "No hay suficientes aspirantes inscriptos" });
     }
 
-    // 📌 Mezclar la lista de aspirantes de forma aleatoria
+    // 📌 Mezclar aleatoriamente
     const seleccionados = aspirantes
       .sort(() => Math.random() - 0.5)
       .slice(0, cantidad);
 
     const fecha_sorteo = obtenerFechaArgentina();
 
-    // 📌 Guardar el sorteo en la base de datos
+    // 📌 Guardar sorteo
     db.run(
       "INSERT INTO sorteos (fecha_sorteo) VALUES (?)",
       [fecha_sorteo],
@@ -92,55 +93,55 @@ router.post("/", (req, res) => {
 
         insertStmt.finalize(() => {
           const sql = `
-    SELECT a.nombre, a.apellido, a.correo, a.dni, a.nombre_tutor, s.tipo
-    FROM sorteados s
-    JOIN aspirantes a ON a.id = s.aspirante_id
-    WHERE s.sorteo_id = ?
-  `;
+            SELECT a.nombre, a.apellido, a.correo, a.dni, a.nombre_tutor, s.tipo
+            FROM sorteados s
+            JOIN aspirantes a ON a.id = s.aspirante_id
+            WHERE s.sorteo_id = ?
+          `;
 
-          db.all(sql, [sorteo_id], async (err, filas) => {
+          db.all(sql, [sorteo_id], (err, filas) => {
             if (err) {
-              console.error(
-                "❌ Error al obtener seleccionados para enviar correos:",
-                err.message
-              );
+              console.error("❌ Error al obtener seleccionados:", err.message);
               return res
                 .status(500)
-                .json({ error: "Error al preparar notificación por email" });
+                .json({ error: "Error al preparar seleccionados" });
             }
 
-            // Función para esperar N milisegundos
-            const delay = (ms) =>
-              new Promise((resolve) => setTimeout(resolve, ms));
-
-            for (const fila of filas) {
-              const mensaje = `
-        <p>Estimado/a ${fila.nombre_tutor},</p>
-        <p>Le informamos que el/la aspirante <strong>${fila.nombre} ${
-                fila.apellido
-              }</strong> ha sido <strong>${fila.tipo.toUpperCase()}</strong> en el sorteo para la sala de 4 años.</p>
-        <p><strong>DNI:</strong> ${fila.dni}</p>
-        <p>Gracias por participar.</p>
-        <p><em>Secretaría Académica - UNCA</em></p>
-      `;
-
-              try {
-                await enviarCorreo(
-                  fila.correo,
-                  `Resultado del sorteo: ${fila.tipo}`,
-                  mensaje
-                );
-                console.log(`✅ Correo enviado a ${fila.correo}`);
-              } catch (e) {
-                console.error(`❌ Error con ${fila.correo}:`, e.message);
-              }
-
-              await delay(30000); // Esperar 30 segundo entre correos
-            }
-
+            // 📌 Responder de inmediato al frontend
             res.json({
-              mensaje: "Sorteo realizado y correos enviados con éxito",
+              mensaje:
+                "Sorteo realizado. Los correos se enviarán en segundo plano.",
               seleccionados: filas,
+            });
+
+            // 📌 Lanzar envío de correos en segundo plano
+            setImmediate(async () => {
+              const delay = (ms) =>
+                new Promise((resolve) => setTimeout(resolve, ms));
+
+              for (const fila of filas) {
+                const mensaje = `
+                  <p>Estimado/a ${fila.nombre_tutor},</p>
+                  <p>Le informamos que el/la aspirante <strong>${fila.nombre} ${fila.apellido}</strong> 
+                  ha sido <strong>${fila.tipo.toUpperCase()}</strong> en el sorteo para la sala de 4 años.</p>
+                  <p><strong>DNI:</strong> ${fila.dni}</p>
+                  <p>Gracias por participar.</p>
+                  <p><em>Secretaría Académica - UNCA</em></p>
+                `;
+
+                try {
+                  await enviarCorreo(
+                    fila.correo,
+                    `Resultado del sorteo: ${fila.tipo}`,
+                    mensaje
+                  );
+                  console.log(`✅ Correo enviado a ${fila.correo}`);
+                } catch (e) {
+                  console.error(`❌ Error con ${fila.correo}:`, e.message);
+                }
+
+                await delay(30000); // 30s entre correos
+              }
             });
           });
         });
@@ -148,6 +149,8 @@ router.post("/", (req, res) => {
     );
   });
 });
+
+
 
 // Obtener historial de sorteos con cantidad de titulares y suplentes
 router.get("/historial", (req, res) => {
