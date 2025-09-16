@@ -35,7 +35,6 @@ router.get("/", (req, res) => {
   });
 });
 
-
 // 📌 Ejecutar el sorteo asincrónico (Opción 1)
 router.post("/", (req, res) => {
   const { cantidad, suplentes } = req.body;
@@ -93,11 +92,17 @@ router.post("/", (req, res) => {
 
         insertStmt.finalize(() => {
           const sql = `
-            SELECT a.nombre, a.apellido, a.correo, a.dni, a.nombre_tutor, s.tipo
-            FROM sorteados s
-            JOIN aspirantes a ON a.id = s.aspirante_id
-            WHERE s.sorteo_id = ?
-          `;
+  SELECT a.id AS aspirante_id,
+         a.nombre,
+         a.apellido,
+         a.correo,
+         a.dni,
+         a.nombre_tutor,
+         s.tipo
+  FROM sorteados s
+  JOIN aspirantes a ON a.id = s.aspirante_id
+  WHERE s.sorteo_id = ?
+`;
 
           db.all(sql, [sorteo_id], (err, filas) => {
             if (err) {
@@ -122,7 +127,9 @@ router.post("/", (req, res) => {
               for (const fila of filas) {
                 const mensaje = `
                   <p>Estimado/a ${fila.nombre_tutor},</p>
-                  <p>Le informamos que el/la aspirante <strong>${fila.nombre} ${fila.apellido}</strong> 
+                  <p>Le informamos que el/la aspirante <strong>${fila.nombre} ${
+                  fila.apellido
+                }</strong> 
                   ha sido <strong>${fila.tipo.toUpperCase()}</strong> en el sorteo para la sala de 4 años.</p>
                   <p><strong>DNI:</strong> ${fila.dni}</p>
                   <p>Gracias por participar.</p>
@@ -149,8 +156,6 @@ router.post("/", (req, res) => {
     );
   });
 });
-
-
 
 // Obtener historial de sorteos con cantidad de titulares y suplentes
 router.get("/historial", (req, res) => {
