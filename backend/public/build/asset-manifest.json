@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1399cc93.css",
-    "main.js": "/static/js/main.2e8dd639.js",
+    "main.js": "/static/js/main.8d830eeb.js",
     "static/js/453.6bacab7c.chunk.js": "/static/js/453.6bacab7c.chunk.js",
     "static/media/UNCA.jpg": "/static/media/UNCA.e59ce04453f1189a7e13.jpg",
     "static/media/UNCA1.jpg": "/static/media/UNCA1.152a027af4ae2c17aef9.jpg",
@@ -9,11 +9,11 @@
     "static/media/LOGO_SA_OFICIAL.jpg": "/static/media/LOGO_SA_OFICIAL.9b227bcbf21a98b51a5c.jpg",
     "index.html": "/index.html",
     "main.1399cc93.css.map": "/static/css/main.1399cc93.css.map",
-    "main.2e8dd639.js.map": "/static/js/main.2e8dd639.js.map",
+    "main.8d830eeb.js.map": "/static/js/main.8d830eeb.js.map",
     "453.6bacab7c.chunk.js.map": "/static/js/453.6bacab7c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1399cc93.css",
-    "static/js/main.2e8dd639.js"
+    "static/js/main.8d830eeb.js"
   ]
 }

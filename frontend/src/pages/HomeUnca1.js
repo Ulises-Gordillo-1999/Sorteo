@@ -4,7 +4,11 @@ import logoSA from "../images/LOGO_SA_OFICIAL.jpg";
 import imageUnca from "../images/UNCA.jpg";
 import { useNavigate } from "react-router-dom";
 
-const LISTADO_URL = "https://docs.google.com/spreadsheets/d/1rmxWP1TvgtQ7pP8UjtQOaBp1jG5YePD50MebEyhQUDI/edit?usp=sharing"; // ⬅️ Reemplazar por el link real
+const LISTADO_URL_PRE =
+  "https://docs.google.com/spreadsheets/d/1rmxWP1TvgtQ7pP8UjtQOaBp1jG5YePD50MebEyhQUDI/edit?usp=sharing"; // ⬅️ Reemplazar por el link real
+
+const LISTADO_URL_SELECCIONADO =
+  "https://docs.google.com/spreadsheets/d/15p9dRbI_F3BAkt034RKExjQzPQEc-DLl-ah2L3thNwg/edit?usp=sharing";
 
 function Home() {
   const navigate = useNavigate();
@@ -59,7 +63,8 @@ function Home() {
                     📅 <strong>Preinscripciones:</strong> Lunes 8 de septiembre
                   </li>
                   <li>
-                    👶 <strong>Edad:</strong> hasta el 30 de junio de 2026
+                    👶 <strong>Edad:</strong> niños/as que cumplan 4 años hasta
+                    el 30 de junio de 2026
                   </li>
                   <li>
                     🌐 <strong>Modalidad:</strong> formulario electrónico
@@ -113,7 +118,7 @@ function Home() {
                   <li>
                     📅 <strong>Inscripciones:</strong> Padres/tutores de
                     aspirantes sorteados deben retirar requisitos el miércoles
-                    25 de septiembre, de 09:00 a 11:00 hs en la escuela
+                    24 de septiembre, de 09:00 a 11:00 hs en la escuela.
                   </li>
                 </ul>
               </div>
@@ -121,7 +126,6 @@ function Home() {
           </div>
         </div>
 
-        
         {/* Recordatorio y botón deshabilitados temporalmente
 <div className="mb-4 text-center">
   <h5 className="fw-bold">Antes de comenzar, asegúrese de tener a mano:</h5>
@@ -141,7 +145,7 @@ function Home() {
 </div>
 */}
 
-        {/* Aviso + Listado depurado */}
+        {/* Aviso + Listado depurado 
         <div className="mb-4">
           <div className="card border-0 rounded-4 shadow-sm">
             <div className="card-body">
@@ -149,7 +153,7 @@ function Home() {
                 Listado depurado y aviso de sorteo
               </h5>
 
-              {/* Versión breve */}
+             
               <p className="mb-2">
                 <strong>Miércoles 17/09 – 10:00 hs:</strong> sorteo de
                 aspirantes (sala de 4, ciclo 2026) en el CMU, con transmisión en
@@ -164,7 +168,7 @@ function Home() {
                 .
               </p>
 
-              {/* Aclaraciones clave */}
+             
               <ul className="mb-3">
                 <li>
                   Se sortearán <strong>20 titulares</strong> y{" "}
@@ -183,11 +187,46 @@ function Home() {
 
               <a
                 className="btn btn-outline-primary fw-semibold rounded-pill px-4"
-                href={LISTADO_URL}
+                href={LISTADO_URL_PRE}
                 target="_blank"
                 rel="noreferrer"
               >
                 Ver listado depurado de preinscriptos/as
+              </a>
+            </div>
+          </div>
+        </div>
+         */}
+
+        {/* Aviso + Listado seleccionado */}
+        <div className="mb-4">
+          <div className="card border-0 rounded-4 shadow-sm">
+            <div className="card-body">
+              <h5 className="card-title fw-bold text-primary mb-3">
+                Listado de seleccionados en el sorteo
+              </h5>
+
+              {/* Aclaraciones clave */}
+              <ul className="mb-3">
+                <li>
+                  Se muestran los resultados oficiales del sorteo, donde fueron
+                  designados <strong> 20 titulares</strong> y{" "}
+                  <strong>10 suplentes</strong> entre las personas que
+                  completaron correctamente el formulario de preinscripción.
+                </li>
+                <li>
+                  El <strong>número de orden</strong> en el listado corresponde al número
+                  asignado en el sorteo.
+                </li>
+              </ul>
+
+              <a
+                className="btn btn-outline-primary fw-semibold rounded-pill px-4"
+                href={LISTADO_URL_SELECCIONADO}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Ver listado de seleccionados
               </a>
             </div>
           </div>
